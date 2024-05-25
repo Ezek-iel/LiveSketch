@@ -8,6 +8,11 @@ from flask_migrate import Migrate
 db = SQLAlchemy()
 migrate = Migrate()
 
+def redirect_home():
+    #* Redirect to home page
+    
+    from flask import redirect, url_for
+    return redirect(url_for('main.home'))
 
 load_dotenv()
 
@@ -28,6 +33,12 @@ def create_app(config = os.getenv('APP_CONFIG')):
     from .main import main_blueprint
     app.register_blueprint(blueprint = main_blueprint, url_prefix = '/main')
 
+    from .room import room_blueprint
+    app.register_blueprint(blueprint = room_blueprint, url_prefix = '/room')
+
+    app.add_url_rule('/', 'home', redirect_home)
+
     from app import models
+    from app import documents
 
     return app

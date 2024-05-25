@@ -26,7 +26,7 @@ class User(db.Model):
     
     @property
     def avatar_url(self):
-        return 
+        return "https://ui-avatars.com/api/?name={0}&background=random".format(self.emailaddress)
     
     @avatar_url.setter
     def avatar_url(self, value):
