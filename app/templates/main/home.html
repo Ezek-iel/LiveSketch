@@ -1,34 +1,25 @@
 {% extends './base.html' %}
 
 {% block title %}
-  Home
+Home
 {% endblock %}
 
 {% block content %}
-<section class="hero is-fullheight is-transparent">
+<section class="hero is-fullheight">
   <div class="hero-body">
-    <div class="container">
-      <div class="columns">
-        <div class="column">
-          <h1 class="title">
-            LiveSketch
-          </h1>
-          <h2 class="subtitle">
-            Realtime Drawing Application
-          </h2>
-          <a href="" class="button is-large is-primary">Join us</a>
-        </div>
-        <div class="column">
-          <figure class="image is-1by1 is-480x480">
-            <img src="{{url_for('static', filename = 'icons/main-img.svg')}}" alt="main-image" class="image">
-          </figure>
-        </div>
-      </div>
+    <div class="container has-text-centered">
+      <h1 class="title is-1" style="font-size: 5vw;">
+        Livesketch
+      </h1>
+      <h2 class="subtitle is-3" style="font-size: 3.1vw;">
+        Draw together, anywhere
+      </h2>
+      <a href="" class="button is-primary is-large">Collaborate Now</a>
     </div>
   </div>
 </section>
 
-<footer class="footer">
+<footer class="footer glass" style="border-radius: 0px;">
   <div class="content has-text-centered">
     <p>
       <strong>Livesketch</strong> by <a href="">Akinfenwa Ezekiel</a>. The source code is licensed
@@ -37,4 +28,9 @@
     </p>
   </div>
 </footer>
+
+<script>
+  typewriterConfig = ["Livesketch", true]
+  typewriter();
+</script>
 {% endblock %}

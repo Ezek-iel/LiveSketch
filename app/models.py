@@ -2,10 +2,11 @@ from app import db
 from uuid import uuid4
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from .utilities import generate_random_uuid
 
 class User(db.Model):
 
-    userId = db.Column(db.String(36), default = uuid4, primary_key = True)
+    userId = db.Column(db.String(36), default = generate_random_uuid, primary_key = True)
     username = db.Column(db.String(100), nullable = False)
     password_hash = db.Column(db.String(200), nullable = False)
     displayname = db.Column(db.String(150), nullable = False)

@@ -36,6 +36,9 @@ def create_app(config = os.getenv('APP_CONFIG')):
     from .room import room_blueprint
     app.register_blueprint(blueprint = room_blueprint, url_prefix = '/room')
 
+    from .auth import auth_blueprint
+    app.register_blueprint(blueprint = auth_blueprint, url_prefix = '/auth')
+
     app.add_url_rule('/', 'home', redirect_home)
 
     from app import models

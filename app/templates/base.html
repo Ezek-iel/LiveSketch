@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar glass" role="navigation" aria-label="main navigation" style="border-radius: 1px;">
       <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -41,18 +41,18 @@
             <a class="navbar-link">
               More
             </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
+            <div class="navbar-dropdown glass">
+              <a class="navbar-item glass">
                 About
               </a>
-              <a class="navbar-item">
+              <a class="navbar-item glass mt-2">
                 Jobs
               </a>
-              <a class="navbar-item">
+              <a class="navbar-item glass mt-2">
                 Contact
               </a>
               <hr class="navbar-divider">
-              <a class="navbar-item">
+              <a class="navbar-item glass mt-2">
                 Report an issue
               </a>
             </div>
@@ -62,10 +62,10 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
+              <a class="button is-primary" href="{{url_for('auth.signup')}}">
                 <strong>Sign up</strong>
               </a>
-              <a class="button is-light">
+              <a class="button is-light" href="{{url_for('auth.login')}}">
                 Log in
               </a>
             </div>
@@ -73,9 +73,23 @@
         </div>
       </div>
     </nav>
-   {% block content %}
     
-   {% endblock %}
+    {% with messages = get_flashed_messages(with_categories = true)  %}
+      {% if messages %}
+
+        {% for category, message in messages %}
+          <div class="notification is-{{category}} has-text-centered">
+            <button class="delete"></button>
+            {{ message }}
+          </div>
+        {% endfor %}
+        
+      {% endif %}
+      
+    {% endwith %}
+    {% block content %}
+      
+    {% endblock %}
   </body>
   <script src="{{url_for('static', filename = 'js/validators.js')}}"></script>
   <script src="{{url_for('static', filename = 'js/toggler.js')}}"></script>

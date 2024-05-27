@@ -1,0 +1,68 @@
+{% extends './base.html' %}
+
+{% block title %}
+Sign up
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <form method="POST">
+
+        {{form.hidden_tag()}}
+
+        <div class="container box glass" style="background-color: rgba(151, 150, 147, 0.295);">
+
+            <div class="box mb-5 glass">
+                <div class="container">
+                <p class="title is-4 is-text-primary">Sign Up to join Livesketch</p>
+                </div>
+                <div class="field mt-6">
+                    <label for="" class="label">{{ form.username.label() }}</label>
+                    <div class="control">
+                        {{ form.username(class = "input glass", placeholder = "Username") }}
+                    </div>
+                </div>
+                <div class="field mt-6">
+                    <label for="" class="label">{{ form.emailaddress.label() }}</label>
+                    <div class="control">
+                        {{ form.emailaddress(class = "input glass", placeholder = "Email Address") }}
+                    </div>
+                </div>
+                <div class="field mt-6">
+                    <label for="" class="label">{{ form.displayname.label() }}</label>
+                    <div class="control">
+                        {{ form.displayname(class = "input glass", placeholder = "Display Name") }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="box mt-5 glass">
+                <div class="container">
+                    <p class="title is-5 is-text-primary">Enter credentials to secure account</p>
+                </div>
+                <div class="field mt-6">
+                    <label for="" class="label">{{ form.password.label() }}</label>
+                    <div class="control">
+                        {{ form.password(class = "input glass", placeholder = "Password") }}
+                    </div>
+                </div>
+                <div class="field mt-6">
+                    <label for="" class="label">{{ form.password_confirm.label() }}</label>
+                    <div class="control">
+                        {{ form.password_confirm(class = "input glass", placeholder = "Confirm Password") }}
+                    </div>
+                </div>
+                <div class="field mt-6">
+                    <div class="control">
+                        {{ form.submit(class = "button is-primary") }}
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Have an account? <a href="{{url_for('auth.login')}}"><strong>Login</strong></a></p>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</section>
+{% endblock %}

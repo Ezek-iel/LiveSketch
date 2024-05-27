@@ -4,14 +4,40 @@
 
 body {
     font-family: Lato;
+    background-image: url('../icons/bg.svg');
+    background-size: cover;
 }
 
 .glass {
     /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 9, 16, 0.473);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 9, 16, 0.3);
+}
+
+.is-primary {
+    background-color: #f17c53;
+}
+
+.has-text-primary {
+    color: #f17c53;
+}
+
+strong, a{
+    color: #f17c53;
+}
+
+.is-info{
+    background-color: #f17c53;
+}
+
+.is-text-primary{
+    color: #f17c53;
+}
+
+.notification{
+    background-color: #96446e;
 }

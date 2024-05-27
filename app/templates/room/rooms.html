@@ -4,7 +4,7 @@ Rooms
 {% endblock %}
 
 {% block content %}
-<div class="section container box mt-4">
+<div class="section container box mt-4 glass">
     <div class="columns">
         <div class="column is-one-fifth">
             <h1 class="title">All Rooms</h1>
@@ -15,7 +15,7 @@ Rooms
                 <label class="label">
                     Search Room</label>
                 <div class="control">
-                    <input class="input is-primary" type="text" placeholder="Enter room">
+                    <input class="input" type="text" placeholder="Enter room">
                 </div>
             </div>
             <a href="" class="button is-primary">Search</a>
@@ -23,68 +23,71 @@ Rooms
     </div>
 </div>
 
-<div class="section container box mt-6">
-    <div class="columns is-multiline">
-        <div class="column">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Room avatar image">
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-content">
-                            <p class="title is-4">Room name</p>
-                            <p class="subtitle is-6">@roomId</p>
-                        </div>
-                    </div>
+<section class="section p-4">
 
-                    <div class="content">
-                        What is this nice room all about?
-                        . <a href="#" class="tag is-medium is-primary is-rounded">#css</a> <a href="#"
-                            class="tag is-medium is-primary is-rounded">#responsive</a>
-                        <br>
-                        <p>Created by <a href="">@username not displayname</a></p>
-                        <div class="field">
-                            <a href="" class="button is-medium is-info">Visit Room</a>
+    <div class="container box glass mt-6 mb-6">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Room avatar image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">Room name</p>
+                                <p class="subtitle is-6">@roomId</p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            What is this nice room all about?
+                            . <a href="#" class="tag is-medium is-primary is-rounded">#css</a> <a href="#"
+                                class="tag is-medium is-primary is-rounded">#responsive</a>
+                            <br>
+                            <p>Created by <a href="">@username not displayname</a></p>
+                            <div class="field">
+                                <a href="" class="button is-medium is-info">Visit Room</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr>
         </div>
-        <hr>
-    </div>
 
-    <div class="box">
-        <nav class="pagination" role="navigation" aria-label="pagination">
-            <a class="pagination-previous">Previous</a>
-            <a class="pagination-next">Next page</a>
-            <ul class="pagination-list">
-                <li>
-                    <a class="pagination-link" aria-label="Goto page 1">1</a>
-                </li>
-                <li>
-                    <span class="pagination-ellipsis">&hellip;</span>
-                </li>
-                <li>
-                    <a class="pagination-link" aria-label="Goto page 45">45</a>
-                </li>
-                <li>
-                    <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
-                </li>
-                <li>
-                    <a class="pagination-link" aria-label="Goto page 47">47</a>
-                </li>
-                <li>
-                    <span class="pagination-ellipsis">&hellip;</span>
-                </li>
-                <li>
-                    <a class="pagination-link" aria-label="Goto page 86">86</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="box">
+            <nav class="pagination" role="navigation" aria-label="pagination">
+                <a class="pagination-previous">Previous</a>
+                <a class="pagination-next">Next page</a>
+                <ul class="pagination-list">
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 1">1</a>
+                    </li>
+                    <li>
+                        <span class="pagination-ellipsis">&hellip;</span>
+                    </li>
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 45">45</a>
+                    </li>
+                    <li>
+                        <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
+                    </li>
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 47">47</a>
+                    </li>
+                    <li>
+                        <span class="pagination-ellipsis">&hellip;</span>
+                    </li>
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 86">86</a>
+                    </li>
+                </ul>
+            </nav>
 
+        </div>
     </div>
-</div>
+</section>
 {% endblock %}
