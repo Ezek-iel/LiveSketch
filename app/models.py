@@ -1,12 +1,19 @@
-from app import db
+from app import db, login_manager
 from uuid import uuid4
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from .utilities import generate_random_uuid
+from flask_login import UserMixin
 
-class User(db.Model):
 
-    userId = db.Column(db.String(36), default = generate_random_uuid, primary_key = True)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+class User(db.Model, UserMixin):
+
+    id = db.Column(db.String(36), default = generate_random_uuid, primary_key = True)
     username = db.Column(db.String(100), nullable = False)
     password_hash = db.Column(db.String(200), nullable = False)
     displayname = db.Column(db.String(150), nullable = False)
@@ -27,7 +34,7 @@ class User(db.Model):
     
     @property
     def avatar_url(self):
-        return "https://ui-avatars.com/api/?name={0}&background=random".format(self.emailaddress)
+        return "https://ui-avatars.com/api/?name={0}&background=random&rounded=true&size=96".format(self.emailaddress)
     
     @avatar_url.setter
     def avatar_url(self, value):
@@ -44,11 +51,11 @@ class User(db.Model):
 
 class Room(db.Model):
     
-    roomId = db.Column(db.String(36), default = uuid4, primary_key = True)
+    id = db.Column(db.String(36), default = uuid4, primary_key = True)
     name = db.Column(db.String(100), nullable = False)
     members = db.Column(db.Integer(), default = 1)
     created = db.Column(db.DateTime(), default = datetime.now)
     updated = db.Column(db.DateTime(), nullable = True)
     documentId = db.Column(db.String(), nullable = True)
 
-    ownerId = db.Column(db.ForeignKey('user.userId'), nullable = False)
+    ownerId = db.Column(db.ForeignKey('user.id'), nullable = False)

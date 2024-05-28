@@ -3,6 +3,7 @@ from flask import render_template, flash, request, redirect, url_for
 from .forms import SignupForm, LoginForm
 from ..models import User, db
 from ..utilities import strip_errors
+from flask_login import login_user
 
 @auth_blueprint.route('signup', methods=['GET', 'POST'])
 def signup():
@@ -24,4 +25,20 @@ def signup():
 @auth_blueprint.route('login', methods=['GET','POST'])
 def login():
     form = LoginForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user_to_verify = User.query.filter_by(username = form.username.data).first()
+            if user_to_verify:
+                if user_to_verify.verify_password(form.password.data):
+                    login_user(user_to_verify)
+                    flash('Logged in succesfully', 'success')
+                else:
+                    flash("Username and password is not correct", 'danger')
+            else:
+                flash('No user with username', 'danger')
+        
+        if form.errors:
+            refined_errors = strip_errors(form.errors)
+            flash(refined_errors,'danger' )
+
     return render_template('auth/login.html', form = form)

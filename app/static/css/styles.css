@@ -38,6 +38,32 @@ strong, a{
     color: #f17c53;
 }
 
-.notification{
-    background-color: #96446e;
+.glass-is-danger{
+     /* From https://css.glass */
+     background-color: #96446e59;
+     border-radius: 16px;
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     backdrop-filter: blur(5px);
+     -webkit-backdrop-filter: blur(5px);
+     border: 1px solid rgba(0, 9, 16, 0.3);
+    
+}
+
+.glass-is-primary{
+     /* From https://css.glass */
+     background-color: #f17d5359;
+     border-radius: 16px;
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     backdrop-filter: blur(5px);
+     -webkit-backdrop-filter: blur(5px);
+     border: 1px solid rgba(0, 9, 16, 0.3);
+}
+
+.glass-is-success{
+    background-color: #f8ac3b59;
+     border-radius: 16px;
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     backdrop-filter: blur(5px);
+     -webkit-backdrop-filter: blur(5px);
+     border: 1px solid rgba(0, 9, 16, 0.3);
 }

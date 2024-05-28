@@ -58,7 +58,18 @@
             </div>
           </div>
         </div>
-
+        {% if current_user.is_authenticated %}
+          
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <img src="{{current_user.avatar_url}}" alt="">
+          </div>
+          <div class="navbar-item mr-5">
+            <p class="title is-5">{{ current_user.username }}</p>
+          </div>
+        </div>
+        {% else %}
+          
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
@@ -71,14 +82,15 @@
             </div>
           </div>
         </div>
+        {% endif %}
       </div>
     </nav>
-    
+    <!-- TODO Finalize pallete -->
     {% with messages = get_flashed_messages(with_categories = true)  %}
       {% if messages %}
 
         {% for category, message in messages %}
-          <div class="notification is-{{category}} has-text-centered">
+          <div class="notification glass-is-{{category}} has-text-centered">
             <button class="delete"></button>
             {{ message }}
           </div>

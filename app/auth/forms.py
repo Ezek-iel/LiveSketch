@@ -27,7 +27,7 @@ class SignupForm(FlaskForm):
 
 class LoginForm(FlaskForm):
 
-    username = StringField(label = "Enter Username", validators = [DataRequired(), Length(min = 9, message = "Minimum length of Username is 8 characters")])
+    username = StringField(label = "Enter Username", validators = [DataRequired(), Length(min = 8, message = "Minimum length of Username is 8 characters")])
     emailaddress = EmailField(label = "Enter Email Address", validators = [DataRequired(),Length(min  = 10), Email(message="Invalid email address")])
     password = PasswordField(label = "Enter Password", validators=[DataRequired(),Length(min = 8)])
     submit = SubmitField(label = "Login")

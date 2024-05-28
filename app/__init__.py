@@ -4,9 +4,11 @@ from dotenv import load_dotenv
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 migrate = Migrate()
+login_manager = LoginManager()
 
 def redirect_home():
     #* Redirect to home page
@@ -25,6 +27,7 @@ def create_app(config = os.getenv('APP_CONFIG')):
     #* Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)
 
     #* register blueprints
     from .users import user_blueprint
