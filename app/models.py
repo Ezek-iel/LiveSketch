@@ -21,6 +21,8 @@ class User(db.Model, UserMixin):
     created = db.Column(db.DateTime(), default = datetime.now)
     updated = db.Column(db.DateTime(), nullable = True)
     last_online = db.Column(db.DateTime(), nullable = True)
+    country = db.Column(db.String(100), nullable = False)
+    date_of_birth = db.Column(db.DateTime(), nullable = True)
 
     rooms = db.relationship("Room", backref = "owner")
 

@@ -6,63 +6,115 @@ Sign up
 
 {% block content %}
 <section class="section">
-    <form method="POST">
+    <!-- TODO Divide Signup into 3 steps using bulma extension -->
+    <section class="hero is-large is-transparent">
+        <div class="hero-body">
+            <div class="container">
 
-        {{form.hidden_tag()}}
-
-        <div class="container box glass" style="background-color: rgba(151, 150, 147, 0.295);">
-
-            <div class="box mb-5 glass">
-                <div class="container">
-                <p class="title is-4 is-text-primary">Sign Up to join Livesketch</p>
-                </div>
-                <div class="field mt-6">
-                    <label for="" class="label">{{ form.username.label() }}</label>
-                    <div class="control">
-                        {{ form.username(class = "input glass", placeholder = "Username") }}
+                <div class="steps" id="signup-steps">
+                    <div class="step-item is-active" data-step="1">
+                        <div class="step-marker">1</div>
+                        <div class="step-details">
+                            <p class="step-title">Account</p>
+                        </div>
+                    </div>
+                    <div class="step-item" data-step="2">
+                        <div class="step-marker">2</div>
+                        <div class="step-details">
+                            <p class="step-title">Profile</p>
+                        </div>
+                    </div>
+                    <div class="step-item" data-step="3">
+                        <div class="step-marker">3</div>
+                        <div class="step-details">
+                            <p class="step-title">Finish</p>
+                        </div>
                     </div>
                 </div>
-                <div class="field mt-6">
-                    <label for="" class="label">{{ form.emailaddress.label() }}</label>
-                    <div class="control">
-                        {{ form.emailaddress(class = "input glass", placeholder = "Email Address") }}
-                    </div>
+
+                    <form method="POST" action="{{ url_for('auth.signup') }}">
+                        <div class="container">
+                        {{ form.hidden_tag() }}
+                        <div class="step-content" data-step="1">
+                            <div class="field">
+                                <label class="label">Email Address</label>
+                                <div class="control">
+                                    {{ form.emailaddress(class = "input glass", placeholder = "Email Address", id = "emailInput") }}
+                                </div>
+                                <p class="has-text-danger" id="emailError"></p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control">
+                                    {{ form.password(class = "input glass", placeholder = "Password",id = "passwordInput") }}
+                                </div>
+                                <p class="has-text-danger" id="passwordError"></p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Confirm Password</label>
+                                <div class="control">
+                                    {{ form.password_confirm(class = "input glass", placeholder = "Confirm Password",id = "passwordConfirmInput") }}
+                                </div>
+                                <p class="has-text-danger" id="passwordConfirmError"></p>
+                            </div>
+
+                            <div class="control">
+                                <button type="button" class="button is-primary" onclick="validateAccountStep()" id="nextButton">Next</button>
+                            </div>
+                        </div>
+
+                        <div class="step-content" data-step="2" style="display: none;">
+                            <div class="field">
+                                <label class="label">Username</label>
+                                <div class="control">
+                                    {{ form.username(class = "input glass", placeholder = "Username", id = "usernameInput")}}
+                                </div>
+                                <p class="has-text-danger" id="usernameError"></p> 
+                            </div>
+                            <div class="field">
+                                <label class="label">Display Name</label>
+                                <div class="control">
+                                    {{ form.displayname(class = "input glass", placeholder = "Display Name", id = "displayNameInput") }}
+                                </div>
+                                <p class="has-text-danger" id="displayNameError"></p> 
+                            </div>
+                            <div class="control">
+                                <button type="button" class="button is-primary is-outlined mr-4"
+                                    onclick="prevStep()">Previous</button>
+                                <button type="button" class="button is-primary" onclick="validateProfileStep()">Next</button>
+                            </div>
+                        </div>
+
+                        <div class="step-content" data-step="3" style="display: none;">
+                            <div class="field">
+                                <label class="label">Country</label>
+                                <div class="control">
+                                    {{ form.country(class = "input glass", placeholder = "Country") }}
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Date of Birth</label>
+                                <div class="control">
+                                    {{ form.date_of_birth(placeholder = "Date of Birth" , class = "input") }}
+                                </div>
+                            </div>
+                            <div class="control">
+                                <button type="button" class="button is-link is-outlined" onclick="prevStep()">Previous</button>
+                                {{ form.submit(class = "button is-primary") }}
+                            </div>
+                        </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="field mt-6">
-                    <label for="" class="label">{{ form.displayname.label() }}</label>
-                    <div class="control">
-                        {{ form.displayname(class = "input glass", placeholder = "Display Name") }}
-                    </div>
-                </div>
+
             </div>
-
-            <div class="box mt-5 glass">
-                <div class="container">
-                    <p class="title is-5 is-text-primary">Enter credentials to secure account</p>
-                </div>
-                <div class="field mt-6">
-                    <label for="" class="label">{{ form.password.label() }}</label>
-                    <div class="control">
-                        {{ form.password(class = "input glass", placeholder = "Password") }}
-                    </div>
-                </div>
-                <div class="field mt-6">
-                    <label for="" class="label">{{ form.password_confirm.label() }}</label>
-                    <div class="control">
-                        {{ form.password_confirm(class = "input glass", placeholder = "Confirm Password") }}
-                    </div>
-                </div>
-                <div class="field mt-6">
-                    <div class="control">
-                        {{ form.submit(class = "button is-primary") }}
-                    </div>
-                </div>
-                <div class="content">
-                    <p>Have an account? <a href="{{url_for('auth.login')}}"><strong>Login</strong></a></p>
-                </div>
-            </div>
-            
         </div>
-    </form>
+    </section>
 </section>
+<script>
+    let body = document.querySelector('body');
+    body.style.height = window.innerHeight + 'px';
+</script>
+</section>
+
 {% endblock %}

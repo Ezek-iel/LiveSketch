@@ -3,7 +3,7 @@ from flask import render_template, flash, request, redirect, url_for
 from .forms import SignupForm, LoginForm
 from ..models import User, db
 from ..utilities import strip_errors
-from flask_login import login_user
+from flask_login import login_user, logout_user
 
 @auth_blueprint.route('signup', methods=['GET', 'POST'])
 def signup():
@@ -32,6 +32,7 @@ def login():
                 if user_to_verify.verify_password(form.password.data):
                     login_user(user_to_verify)
                     flash('Logged in succesfully', 'success')
+                    return redirect(url_for('room.all_rooms'))
                 else:
                     flash("Username and password is not correct", 'danger')
             else:
@@ -42,3 +43,9 @@ def login():
             flash(refined_errors,'danger' )
 
     return render_template('auth/login.html', form = form)
+
+@auth_blueprint.route("logout", methods=['GET', 'POST'])
+def logout():
+    logout_user()
+    flash("Logged out sucessfully", "success")
+    return redirect(url_for('main.home'))

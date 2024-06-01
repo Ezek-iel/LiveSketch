@@ -9,6 +9,7 @@
     {% endblock %}</title>
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/bulma.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/styles.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.1.1/dist/css/bulma-steps.min.css">
   </head>
 
   <body>
@@ -67,6 +68,9 @@
           <div class="navbar-item mr-5">
             <p class="title is-5">{{ current_user.username }}</p>
           </div>
+          <div class="navbar-item">
+            <a href="{{url_for('auth.logout')}}" class="button is-light mr-5"><strong>Logout</strong></a>
+          </div>
         </div>
         {% else %}
           
@@ -103,6 +107,6 @@
       
     {% endblock %}
   </body>
-  <script src="{{url_for('static', filename = 'js/validators.js')}}"></script>
   <script src="{{url_for('static', filename = 'js/toggler.js')}}"></script>
+  <script src="{{url_for('static', filename = 'js/bulma-steps.js')}}"></script>
 </html>

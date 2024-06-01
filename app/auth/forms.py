@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField
+from wtforms import StringField, PasswordField, SubmitField, EmailField, SelectField, DateField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 
 from ..models import User
+from ..utilities import countries
 
 class SignupForm(FlaskForm):
 
@@ -19,9 +20,11 @@ class SignupForm(FlaskForm):
         
     username = StringField(label = "Enter Username", validators = [DataRequired(), Length(min = 8,message= "Minimum length of Username is 8 characters")])
     emailaddress = EmailField(label = "Enter Email Address", validators = [DataRequired(),Length(min  = 10), Email(message="Invalid email address")])
-    displayname = StringField(label = "Enter Display Name", validators = [DataRequired(),Length(min = 8,message= "Minimum length of password is 8 characters")])
+    displayname = StringField(label = "Enter Display Name", validators = [DataRequired(),Length(min = 5,message= "Minimum length of password is 8 characters")])
     password = PasswordField(label = "Enter Password", validators=[DataRequired(),Length(min = 8)])
     password_confirm = PasswordField(label = "Confirm Password", validators=[DataRequired(), EqualTo('password')])
+    country = SelectField("Select Country", choices = countries, validators = [DataRequired()])
+    date_of_birth = DateField(label = "Enter Date of Birth")	
     submit = SubmitField(label = "Sign Up")
         
 

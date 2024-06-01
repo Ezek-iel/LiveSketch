@@ -31,26 +31,119 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const highlightWord = document.getElementById('highlight-word');
+// * Function called when navigating to the next stage of the signup
+function nextStep() {
+  const currentStep = document.querySelector('.step-item.is-active');
+  const currentStepContent = document.querySelector(`.step-content[data-step="${currentStep.dataset.step}"]`);
 
-  const wordWidth = highlightWord.offsetWidth;
-  const wordHeight = highlightWord.offsetHeight;
+  const nextStep = currentStep.nextElementSibling;
+  if (nextStep) {
+      currentStep.classList.remove('is-active');
+      nextStep.classList.add('is-active');
 
-  const svgNS = "http://www.w3.org/2000/svg";
+      currentStepContent.classList.add('step-content-exit-active');
+      currentStepContent.addEventListener('transitionend', () => {
+          currentStepContent.style.display = 'none';
+          currentStepContent.classList.remove('step-content-exit-active');
 
-  const svg = document.createElementNS(svgNS, "svg");
-  svg.setAttribute("width", wordWidth + 20); // Adjust as needed
-  svg.setAttribute("height", wordHeight + 20); // Adjust as needed
+          const nextStepContent = document.querySelector(`.step-content[data-step="${nextStep.dataset.step}"]`);
+          nextStepContent.style.display = 'block';
+          nextStepContent.classList.add('step-content-enter');
+          setTimeout(() => {
+              nextStepContent.classList.remove('step-content-enter');
+          }, 10);
+      }, { once: true });
+  }
+}
 
-  const path = document.createElementNS(svgNS, "path");
-  path.setAttribute("d", `M10,${wordHeight / 2} Q50,10 ${wordWidth},${wordHeight / 2} T${wordWidth + 10},${wordHeight / 2}`);
-  path.setAttribute("fill", "none");
-  path.setAttribute("stroke", "blue");
-  path.setAttribute("stroke-width", "2");
-  path.setAttribute("stroke-dasharray", "4"); // Gives a hand-drawn dashed effect
-  path.setAttribute("stroke-linecap", "round");
 
-  svg.appendChild(path);
-  highlightWord.appendChild(svg);
-});
+//* Function called when navigating to the previous stage of the signup
+function prevStep() {
+  const currentStep = document.querySelector('.step-item.is-active');
+  const currentStepContent = document.querySelector(`.step-content[data-step="${currentStep.dataset.step}"]`);
+
+  const prevStep = currentStep.previousElementSibling;
+  if (prevStep) {
+      currentStep.classList.remove('is-active');
+      prevStep.classList.add('is-active');
+
+      currentStepContent.classList.add('step-content-enter-active');
+      currentStepContent.addEventListener('transitionend', () => {
+          currentStepContent.style.display = 'none';
+          currentStepContent.classList.remove('step-content-enter-active');
+
+          const prevStepContent = document.querySelector(`.step-content[data-step="${prevStep.dataset.step}"]`);
+          prevStepContent.style.display = 'block';
+          prevStepContent.classList.add('step-content-exit');
+          setTimeout(() => {
+              prevStepContent.classList.remove('step-content-exit');
+          }, 10);
+      }, { once: true });
+  }
+}
+
+function validateAccountStep() {
+
+    let emailAddress = document.getElementById("emailInput").value;
+    let emailRemark = document.getElementById("emailError")
+
+    let password = document.getElementById("passwordInput").value;
+    let passwordRemark = document.getElementById("passwordError")
+
+    let passwordConfirm = document.getElementById("passwordConfirmInput").value
+    let passwordConfirmRemark = document.getElementById("passwordConfirmError")
+
+    
+    //* Validating email address
+    if (emailAddress.length < 8){
+        emailRemark.textContent = "Email Address must be 8 characters or more"
+    }else{
+      emailRemark.textContent = ""
+    }
+
+    //* validating password
+    if (password.length < 8){
+      passwordRemark.textContent = "Password Must be 8 characters or more"
+    }else{
+      passwordRemark.textContent = ""
+    }
+    
+    //* validating password confirm
+    if (password !== passwordConfirm){
+      passwordConfirmRemark.textContent = "Confirm password must be equal to password"
+    }else{
+      passwordConfirmRemark.textContent = ""
+    }
+
+    if (emailAddress.length >= 8 && password.length >= 8 && password === passwordConfirm){
+      nextStep()
+    }
+}
+
+function validateProfileStep() {
+  let username = document.getElementById("usernameInput").value
+  let usernameRemark = document.getElementById("usernameError")
+
+  let displayName = document.getElementById("displayNameInput").value
+  let displayNameRemark = document.getElementById("displayNameError")
+  
+
+  if (username.length < 8){
+    usernameRemark.textContent = "Username must be 8 characters or more"
+  }
+  else{
+    usernameRemark.textContent = ""
+  }
+
+  if (displayName.length < 5){
+    displayNameRemark.textContent = "Display Name must be 5 characters or more"
+  }
+  else{
+    usernameRemark.textContent = ""
+  }
+
+  if (username.length >= 8 && displayName.length >= 5){
+    nextStep()
+  }
+
+}
